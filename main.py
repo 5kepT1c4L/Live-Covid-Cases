@@ -1,15 +1,41 @@
 from bs4 import BeautifulSoup
 import requests
+import time
 
-website = requests.get("https://www.worldometers.info/coronavirus/").text
+def program():
 
-soup = BeautifulSoup(website, 'lxml')
+    while 1:
 
-info_boxes = soup.find_all('div', class_="maincounter-number")
+        website = requests.get("https://www.worldometers.info/coronavirus/").text
 
-for info in info_boxes:
+        soup = BeautifulSoup(website, 'lxml')
 
-    print(info.span.text)
+        info_boxes = soup.find_all('div', class_="maincounter-number")
+
+        def print_values():
+
+            epoch_time = 1631673866
+
+            local_time = time.ctime(epoch_time)
+
+            print("Updated at: {}".format(local_time))
+            
+            print("----------------------------------------------------\n")
+
+            print("Current COVID-19 Cases: {}\n".format(info_boxes[0].span.text))
+
+            print("COVID-19 Deaths: {}\n".format(info_boxes[1].span.text))
+
+            print("Patients Recovered: {}\n".format(info_boxes[2].span.text))
+
+            print("<-------------------------------------------------->\n\n")
+        
+        print_values()
+
+        time.sleep(180)
+
+
+program()
 
 
 
