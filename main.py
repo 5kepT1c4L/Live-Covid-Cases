@@ -21,8 +21,7 @@ def program():
             global now
             
             now = datetime.now()
-
-        
+            
             print("Updated at: {}".format(now.strftime("%I:%M:%S")))
             
             print("----------------------------------------------------\n")
