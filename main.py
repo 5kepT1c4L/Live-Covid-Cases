@@ -1,10 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 import time
+from datetime import datetime
+
 
 def program():
 
     while 1:
+
+        global now
 
         website = requests.get("https://www.worldometers.info/coronavirus/").text
 
@@ -14,11 +18,12 @@ def program():
 
         def print_values():
 
-            epoch_time = 1631673866
+            global now
+            
+            now = datetime.now()
 
-            local_time = time.ctime(epoch_time)
-
-            print("Updated at: {}".format(local_time))
+        
+            print("Updated at: {}".format(now.strftime("%I:%M:%S")))
             
             print("----------------------------------------------------\n")
 
@@ -31,6 +36,10 @@ def program():
             print("<-------------------------------------------------->\n\n")
         
         print_values()
+
+        del info_boxes
+
+        del now
 
         time.sleep(180)
 
